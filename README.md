@@ -1,4 +1,7 @@
-Dinner
+Dinner planner
 ======
 
-Dinner
+Dinner planner
+
+lab 2 & 3 
+

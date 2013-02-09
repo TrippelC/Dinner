@@ -34,9 +34,7 @@ public class DinnerPlanner extends JFrame {
 		
 		//
 		dinnerPlanner.setTitle("Dinner Planner");
-		
-		dinnerPlanner.getModel().setNumberOfGuests(3);
-		
+			
 		//Getting some dishes for setup
 		Dish[] dishes = new Dish[dinnerPlanner.getModel().getDishes().size()];
 		int i = 0;

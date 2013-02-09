@@ -32,7 +32,7 @@ public class DinnerPlanner extends JFrame {
 		dinnerPlanner.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dinnerPlanner.setResizable(false);
 		
-		//
+		//test
 		dinnerPlanner.setTitle("Dinner Planner");
 			
 		//Getting some dishes for setup

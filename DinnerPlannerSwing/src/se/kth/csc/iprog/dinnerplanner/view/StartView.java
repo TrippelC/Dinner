@@ -197,16 +197,6 @@ public class StartView extends JPanel implements Observer {
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
 
-		chosenpanel = new JPanel();
-		sl_rightPanel.putConstraint(SpringLayout.NORTH, chosenpanel, 6,
-				SpringLayout.SOUTH, dinnerMenuLabel);
-		sl_rightPanel.putConstraint(SpringLayout.WEST, chosenpanel, 10,
-				SpringLayout.WEST, rightPanel);
-		sl_rightPanel.putConstraint(SpringLayout.SOUTH, chosenpanel, 248,
-				SpringLayout.SOUTH, dinnerMenuLabel);
-		sl_rightPanel.putConstraint(SpringLayout.EAST, chosenpanel, 230,
-				SpringLayout.WEST, rightPanel);
-		rightPanel.add(chosenpanel);
 
 		addModel(model);
 		// adds the dishes
@@ -217,7 +207,6 @@ public class StartView extends JPanel implements Observer {
 		new MainController(model, this);
 	}
 
-	JPanel chosenpanel;
 
 	public void updateDishes(Set<Dish> modelDishes, int type) {
 

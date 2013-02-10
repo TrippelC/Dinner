@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import se.kth.csc.iprog.dinnerplanner.model.*;
 import se.kth.csc.iprog.dinnerplanner.view.*;
-
+//test
 
 public class DinnerPlanner extends JFrame {
 	
@@ -47,7 +47,7 @@ public class DinnerPlanner extends JFrame {
 		 * ******************************************************************/
 		
 		///StartView///////////////////////////////////////////////////////
-//		JComponent view = new StartView(dinnerPlanner.getModel());
+		JComponent view = new StartView(dinnerPlanner.getModel());
 		///END OF StartView////////////////////////////////////////////////
 		
 		
@@ -103,19 +103,19 @@ public class DinnerPlanner extends JFrame {
 		
 		///PreparationView[2] (FOR MENU)///////////////////////////////////
 		//ADD FULL MENU:
-		boolean[] choosenFlag = new boolean[3];
-		for(Dish dish : dishes)
-			if(dish.getType() == Dish.STARTER && !choosenFlag[Dish.STARTER-1]){
-				dinnerPlanner.getModel().selectDish(dish);
-			}else if(dish.getType() == Dish.MAIN && !choosenFlag[Dish.MAIN-1]){
-				dinnerPlanner.getModel().selectDish(dish);
-			}else if(dish.getType() == Dish.DESERT && !choosenFlag[Dish.DESERT-1]){
-				dinnerPlanner.getModel().selectDish(dish);
-			}else{
-				break;
-			}
-	
-		JComponent view = new PreparationView(dinnerPlanner.getModel());
+//		boolean[] choosenFlag = new boolean[3];
+//		for(Dish dish : dishes)
+//			if(dish.getType() == Dish.STARTER && !choosenFlag[Dish.STARTER-1]){
+//				dinnerPlanner.getModel().selectDish(dish);
+//			}else if(dish.getType() == Dish.MAIN && !choosenFlag[Dish.MAIN-1]){
+//				dinnerPlanner.getModel().selectDish(dish);
+//			}else if(dish.getType() == Dish.DESERT && !choosenFlag[Dish.DESERT-1]){
+//				dinnerPlanner.getModel().selectDish(dish);
+//			}else{
+//				break;
+//			}
+//	
+//		JComponent view = new PreparationView(dinnerPlanner.getModel());
 		///END OF PreparationView[2]///////////////////////////////////////
 		
 		

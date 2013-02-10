@@ -3,7 +3,7 @@ package se.kth.csc.iprog.dinnerplanner.view;
 import java.awt.Font;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,118 +13,51 @@ import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 import javax.swing.JButton;
 
+import se.kth.csc.iprog.dinnerplanner.controller.MainController;
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
 import se.kth.csc.iprog.dinnerplanner.model.Dish;
+
 import se.kth.csc.iprog.dinnerplanner.model.ScrollablePanel;
 
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JTextField;
 
 public class StartView extends JPanel {
 	private JTextField starterSearch, mainSearch, desertSearch;
-
+	public JButton preparationButton = new JButton("Preparation");
+	public JButton ingredientsButton = new JButton("Ingredients");
+	public JTabbedPane leftPanel = new JTabbedPane();
 	/**
 	 * Create the panel.
 	 * @throws IOException 
 	 */
+	MainController controller;
 	public StartView(DinnerModel model) {
+	controller = new MainController(model,this);
 		setBounds(100, 100, 680, 440);
 		SpringLayout springLayout = new SpringLayout();
 
 		setLayout(springLayout);
 
 		// Create leftPanel [TabbedPane]
-		JTabbedPane leftPanel = new JTabbedPane();
 		springLayout.putConstraint(SpringLayout.NORTH, leftPanel, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, leftPanel, 10, SpringLayout.WEST, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, leftPanel, -10, SpringLayout.SOUTH, this);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Add subPanel inside tab
-		JPanel starter = new JPanel(false);
+		TabPanel starter = new TabPanel("Starter", model);
 		leftPanel.addTab("Starter", starter);
-		SpringLayout sl_starter = new SpringLayout();
-		starter.setLayout(sl_starter);
-		
-		starterSearch = new JTextField("Search");
-		sl_starter.putConstraint(SpringLayout.NORTH, starterSearch, 10, SpringLayout.NORTH, starter);
-		sl_starter.putConstraint(SpringLayout.WEST, starterSearch, 10, SpringLayout.WEST, starter);
-		sl_starter.putConstraint(SpringLayout.SOUTH, starterSearch, 40, SpringLayout.NORTH, starter);
-		sl_starter.putConstraint(SpringLayout.EAST, starterSearch, 330, SpringLayout.WEST, starter);
-		starter.add(starterSearch);
-		starterSearch.setColumns(10);
-		
-		ScrollablePanel starterPanel = new ScrollablePanel(model.getDishesOfType(Dish.STARTER).size());
-		
-		JScrollPane jspStarter = new JScrollPane(starterPanel);
-		jspStarter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jspStarter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		sl_starter.putConstraint(SpringLayout.NORTH, jspStarter, 5, SpringLayout.SOUTH, starterSearch);
-		sl_starter.putConstraint(SpringLayout.WEST, jspStarter, 0, SpringLayout.WEST, starter);
-		sl_starter.putConstraint(SpringLayout.SOUTH, jspStarter, 0, SpringLayout.SOUTH, starter);
-		sl_starter.putConstraint(SpringLayout.EAST, jspStarter, 0, SpringLayout.EAST, starter);
-		starter.add(jspStarter);
-		starterPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-		JPanel main = new JPanel(false);
+		TabPanel main =  new TabPanel("Main", model);
 		leftPanel.addTab("Main", main);
-		SpringLayout sl_main = new SpringLayout();
-		main.setLayout(sl_main);
-		
-		mainSearch = new JTextField("Search");
-		sl_main.putConstraint(SpringLayout.NORTH, mainSearch, 10, SpringLayout.NORTH, main);
-		sl_main.putConstraint(SpringLayout.WEST, mainSearch, 10, SpringLayout.WEST, main);
-		sl_main.putConstraint(SpringLayout.SOUTH, mainSearch, 40, SpringLayout.NORTH, main);
-		sl_main.putConstraint(SpringLayout.EAST, mainSearch, 330, SpringLayout.WEST, main);
-		main.add(mainSearch);
-		mainSearch.setColumns(10);
-		
-		ScrollablePanel mainPanel = new ScrollablePanel(model.getDishesOfType(Dish.MAIN).size());
-		
-		JScrollPane jspMain = new JScrollPane(mainPanel);
-		jspMain.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jspMain.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		sl_main.putConstraint(SpringLayout.NORTH, jspMain, 5, SpringLayout.SOUTH, mainSearch);
-		sl_main.putConstraint(SpringLayout.WEST, jspMain, 0, SpringLayout.WEST, main);
-		sl_main.putConstraint(SpringLayout.SOUTH, jspMain, 0, SpringLayout.SOUTH, main);
-		sl_main.putConstraint(SpringLayout.EAST, jspMain, 0, SpringLayout.EAST, main);
-		main.add(jspMain);
-		mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-////////////////////////////////////////////////////////////////////////////////////////////////////
-		JPanel desert = new JPanel(false);
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		TabPanel desert =  new TabPanel("Desert", model);
 		leftPanel.addTab("Desert", desert);
-		SpringLayout sl_desert = new SpringLayout();
-		desert.setLayout(sl_desert);
-		
-		desertSearch = new JTextField("Search");
-		sl_desert.putConstraint(SpringLayout.NORTH, desertSearch, 10, SpringLayout.NORTH, desert);
-		sl_desert.putConstraint(SpringLayout.WEST, desertSearch, 10, SpringLayout.WEST, desert);
-		sl_desert.putConstraint(SpringLayout.SOUTH, desertSearch, 40, SpringLayout.NORTH, desert);
-		sl_desert.putConstraint(SpringLayout.EAST, desertSearch, 330, SpringLayout.WEST, desert);
-		desert.add(desertSearch);
-		desertSearch.setColumns(10);
-		
-		ScrollablePanel desertPanel = new ScrollablePanel(model.getDishesOfType(Dish.DESERT).size());		
-		
-		
-		JScrollPane jspDesert = new JScrollPane(desertPanel);
-		jspDesert.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jspDesert.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		sl_desert.putConstraint(SpringLayout.NORTH, jspDesert, 5, SpringLayout.SOUTH, desertSearch);
-		sl_desert.putConstraint(SpringLayout.WEST, jspDesert, 0, SpringLayout.WEST, desert);
-		sl_desert.putConstraint(SpringLayout.SOUTH, jspDesert, 0, SpringLayout.SOUTH, desert);
-		sl_desert.putConstraint(SpringLayout.EAST, jspDesert, 0, SpringLayout.EAST, desert);
-		desert.add(jspDesert);
-		desertPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		for(Dish dish : model.getDishes()){
 			ImageIcon ic = null;
@@ -140,13 +73,13 @@ public class StartView extends JPanel {
 			
 			switch(dish.getType()){
 				case 1:
-					starterPanel.add(tempDish);
+					starter.scrollPanel.add(tempDish);
 					break;
 				case 2:
-					mainPanel.add(tempDish);
+					main.scrollPanel.add(tempDish);
 					break;
 				case 3:
-					desertPanel.add(tempDish);
+					desert.scrollPanel.add(tempDish);
 			}
 		}
 
@@ -233,14 +166,15 @@ public class StartView extends JPanel {
 		
 		
 		
-		JButton preparationButton = new JButton("Preparation");
+//preparationButton
 		sl_rightPanel.putConstraint(SpringLayout.WEST, preparationButton, 10, SpringLayout.WEST, rightPanel);
 		sl_rightPanel.putConstraint(SpringLayout.SOUTH, preparationButton, -10, SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(preparationButton);
 		
-		JButton ingredientsButton = new JButton("Ingredients");
+//ingredientsButton
 		sl_rightPanel.putConstraint(SpringLayout.EAST, ingredientsButton, -10, SpringLayout.EAST, rightPanel);
 		sl_rightPanel.putConstraint(SpringLayout.SOUTH, ingredientsButton, -10, SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
 	}
+
 }

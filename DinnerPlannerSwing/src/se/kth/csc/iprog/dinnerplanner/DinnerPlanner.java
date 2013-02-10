@@ -24,6 +24,8 @@ public class DinnerPlanner extends JFrame {
 	public DinnerPlanner() {
 
 	}
+	
+public static boolean[] choosenFlag;
 
 	public static void main(String[] args) throws IOException {
 		// Initiating the main JFrame
@@ -50,7 +52,7 @@ public class DinnerPlanner extends JFrame {
 		 */
 
 		// /StartView///////////////////////////////////////////////////////
-		// JComponent view = new StartView(dinnerPlanner.getModel());
+//		 JComponent view = new StartView(dinnerPlanner.getModel());
 		// /END OF StartView////////////////////////////////////////////////
 
 		// /DishView////////////////////////////////////////////////////////
@@ -69,21 +71,27 @@ public class DinnerPlanner extends JFrame {
 
 		// /FullMenuView////////////////////////////////////////////////////
 		// ADD FULL MENU:
-		boolean[] choosenFlag = new boolean[3];
+		choosenFlag = new boolean[3];
+		choosenFlag[0] = false;
+		choosenFlag[1] = false;
+		choosenFlag[2] = false;
 		for (Dish dish : dishes)
 			if (dish.getType() == Dish.STARTER
 					&& !choosenFlag[Dish.STARTER - 1]) {
+				choosenFlag[Dish.STARTER - 1] = true;
 				dinnerPlanner.getModel().selectDish(dish);
-			} else if (dish.getType() == Dish.MAIN
-					&& !choosenFlag[Dish.MAIN - 1]) {
+		} else if (dish.getType() == Dish.MAIN
+				&& !choosenFlag[Dish.MAIN - 1]) {
+				choosenFlag[Dish.MAIN - 1] = true;
 				dinnerPlanner.getModel().selectDish(dish);
 			} else if (dish.getType() == Dish.DESERT
-					&& !choosenFlag[Dish.DESERT - 1]) {
-				dinnerPlanner.getModel().selectDish(dish);
-			} else {
+				&& !choosenFlag[Dish.DESERT - 1]) {
+				choosenFlag[Dish.DESERT - 1] = true;
+			dinnerPlanner.getModel().selectDish(dish);
+		} else {
 				break;
 			}
-
+//
 		JComponent view = new StartView(dinnerPlanner.getModel());
 		// /END OF FullMenuView/////////////////////////////////////////////
 

@@ -1,5 +1,6 @@
 package se.kth.csc.iprog.dinnerplanner.view;
 
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.imageio.ImageIO;
@@ -8,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
@@ -35,6 +37,10 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel starter;
 	public TabPanel main;
 	public TabPanel desert;
+	private SpringLayout sl_rightPanel;
+	private JLabel dinnerMenuLabel;
+	private JPanel rightPanel;
+	
 	
 	/**
 	 * Create the panel.
@@ -76,7 +82,7 @@ public class StartView extends JPanel implements Observer {
 		// //////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Create rightPanel
-		JPanel rightPanel = new JPanel();
+		rightPanel = new JPanel();
 		springLayout.putConstraint(SpringLayout.EAST, leftPanel, -6,
 				SpringLayout.WEST, rightPanel);
 		springLayout.putConstraint(SpringLayout.WEST, rightPanel, -250,
@@ -89,7 +95,7 @@ public class StartView extends JPanel implements Observer {
 		springLayout.putConstraint(SpringLayout.SOUTH, rightPanel, -10,
 				SpringLayout.SOUTH, this);
 		this.add(rightPanel);
-		SpringLayout sl_rightPanel = new SpringLayout();
+		sl_rightPanel = new SpringLayout();
 		rightPanel.setLayout(sl_rightPanel);
 
 		JLabel nopLabel = new JLabel("Number of people:");
@@ -114,6 +120,8 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.WEST, costTagLabel, 10,
 				SpringLayout.WEST, rightPanel);
 		rightPanel.add(costTagLabel);
+
+
 
 		sl_rightPanel.putConstraint(SpringLayout.NORTH, costLabel, 0,
 				SpringLayout.NORTH, costTagLabel);
@@ -146,7 +154,6 @@ public class StartView extends JPanel implements Observer {
 					+ "</html>");
 			btnNewButton[i] = new JButton(new ImageIcon(
 					"images/delete_icon.gif"));
-
 
 			sl_rightPanel.putConstraint(SpringLayout.NORTH, dishIcon[i],
 					i == 0 ? 20 : 15, SpringLayout.SOUTH,
@@ -194,18 +201,25 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.SOUTH, ingredientsButton, -10,
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
+		
+	 chosenpanel = new JPanel();
+		sl_rightPanel.putConstraint(SpringLayout.NORTH, chosenpanel, 6, SpringLayout.SOUTH, dinnerMenuLabel);
+		sl_rightPanel.putConstraint(SpringLayout.WEST, chosenpanel, 10, SpringLayout.WEST, rightPanel);
+		sl_rightPanel.putConstraint(SpringLayout.SOUTH, chosenpanel, 248, SpringLayout.SOUTH, dinnerMenuLabel);
+		sl_rightPanel.putConstraint(SpringLayout.EAST, chosenpanel, 230, SpringLayout.WEST, rightPanel);
+		rightPanel.add(chosenpanel);
 
 	
-
+addModel(model);
 		//adds the dishes
 		updateDishes(model.getDishes(), 0);
 		//add the leftPanel
 		add(leftPanel);
 
-		//Creates a controller
 		new MainController(model, this);
 	}
 
+	JPanel chosenpanel ;
 	public void updateDishes(Set<Dish> modelDishes, int type) {
 
 		if (type == 1) {
@@ -229,12 +243,13 @@ public class StartView extends JPanel implements Observer {
 				e.printStackTrace();
 			}
 			JLabel tempDish = new JLabel(dish.getName(), ic, JLabel.CENTER);
+			tempDish.setName(dish.getName());
 			tempDish.setVerticalTextPosition(JLabel.BOTTOM);
 			tempDish.setHorizontalTextPosition(JLabel.CENTER);
-
 			switch (dish.getType()) {
 			case 1:
 				starter.scrollPanel.add(tempDish);
+				
 				starter.updateUI();
 				break;
 			case 2:
@@ -246,8 +261,15 @@ public class StartView extends JPanel implements Observer {
 				desert.updateUI();
 			}
 		}
+		
 	
 	}
+
+	
+public void addModel(DinnerModel model){
+
+
+}
 
 	@Override
 	public void update(Observable arg0, Object object) {
@@ -256,5 +278,4 @@ public class StartView extends JPanel implements Observer {
 			costLabel.setText("$ " + model.getTotalMenuPrice());
 		}
 	}
-
 }

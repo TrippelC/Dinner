@@ -35,7 +35,6 @@ public class DishView extends JPanel {
 		try {
 			bi = ImageIO.read(new File("images/"+dish.getImage()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

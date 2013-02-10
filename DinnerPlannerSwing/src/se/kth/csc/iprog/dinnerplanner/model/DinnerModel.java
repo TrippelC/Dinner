@@ -7,14 +7,7 @@ import java.util.Set;
 public class DinnerModel extends Observable implements IDinnerModel {
 	
 
-	Set<Dish> dishes = new HashSet<Dish>();
-	
-	/**
-	 * TODO: For Lab2 you need to implement the IDinnerModel interface.
-	 * When you do this you will have all the needed fields and methods
-	 * for the dinner planner (number of guests, selected dishes, etc.). 
-	 */
-	
+	private Set<Dish> dishes = new HashSet<Dish>();
 	private int numberOfGuests;
 	private Dish selectedDishes[] = new Dish[3]; //(1-1 = starter, 2-1 = main, 3-1 = desert)
 	

@@ -36,7 +36,6 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel main;
 	public TabPanel desert;
 	
-	private	MainController controller;
 	/**
 	 * Create the panel.
 	 * 
@@ -196,12 +195,15 @@ public class StartView extends JPanel implements Observer {
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
 
-		System.out.println("asdadads");
+	
 
+		//adds the dishes
 		updateDishes(model.getDishes(), 0);
+		//add the leftPanel
 		add(leftPanel);
 
-		controller = new MainController(model, this);
+		//Creates a controller
+		new MainController(model, this);
 	}
 
 	public void updateDishes(Set<Dish> modelDishes, int type) {
@@ -224,7 +226,6 @@ public class StartView extends JPanel implements Observer {
 						new File("images/" + dish.getImage()))
 						.getScaledInstance(100, 100, 0));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JLabel tempDish = new JLabel(dish.getName(), ic, JLabel.CENTER);

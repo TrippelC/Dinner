@@ -33,6 +33,7 @@ public class DinnerPlanner extends JFrame {
 		dinnerPlanner.setResizable(false);
 		
 		//test no more :D
+		//bar
 		dinnerPlanner.setTitle("Dinner Planner");
 			
 		//Getting some dishes for setup

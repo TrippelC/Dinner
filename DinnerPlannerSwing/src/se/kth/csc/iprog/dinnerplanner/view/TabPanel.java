@@ -13,12 +13,13 @@ import se.kth.csc.iprog.dinnerplanner.model.Dish;
 
 public class TabPanel extends JPanel {
 	public ScrollablePanel scrollPanel = null;
+	public JTextField panelSearch;
 	public TabPanel(String name, DinnerModel model) {
 
 		SpringLayout sl_panel = new SpringLayout();
 		this.setLayout(sl_panel);
 
-		JTextField panelSearch = new JTextField("Search");
+		panelSearch = new JTextField("Search");
 		sl_panel.putConstraint(SpringLayout.NORTH, panelSearch, 10,
 				SpringLayout.NORTH, this);
 		sl_panel.putConstraint(SpringLayout.WEST, panelSearch, 10,

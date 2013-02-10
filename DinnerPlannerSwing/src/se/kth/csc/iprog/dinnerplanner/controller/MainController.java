@@ -27,10 +27,14 @@ public class MainController implements ActionListener, ChangeListener {
 
 		view.ingredientsButton.addActionListener(this);
 		view.preparationButton.addActionListener(this);
+		
 		view.guestCountSpinner.addChangeListener(this);
 		
-	}
-
+		view.starter.panelSearch.addActionListener(this);
+		view.desert.panelSearch.addActionListener(this);
+		view.main.panelSearch.addActionListener(this);
+		
+	}		
 	private void setUpView(JComponent comp) {
 		JFrame jf = new JFrame();
 		jf.setBounds(comp.getBounds());
@@ -49,8 +53,23 @@ public class MainController implements ActionListener, ChangeListener {
 		if (e.getSource() == view.preparationButton) {
 			setUpView(new PreparationView(model));
 		}
-
-		
+		if (e.getSource() == view.starter.panelSearch){
+			for (Dish dish : model.filterDishesOfType(1, view.starter.panelSearch.getText())) {
+				System.out.println(dish.getName());
+			}
+		}
+		if (e.getSource() == view.main.panelSearch){
+			
+			for (Dish dish : model.filterDishesOfType(2, view.main.panelSearch.getText())) {
+				System.out.println(dish.getName());
+			}
+		}
+		if (e.getSource() == view.desert.panelSearch){
+			for (Dish dish : model.filterDishesOfType(3, view.desert.panelSearch.getText())) {
+				System.out.println(dish.getName());
+			}
+			
+		}
 		
 	}
 

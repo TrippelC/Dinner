@@ -43,7 +43,7 @@ public class StartView extends JPanel implements Observer {
 
 	public StartView(DinnerModel model) {
 		model.addObserver(this);
-		controller = new MainController(model, this);
+	
 		setBounds(100, 100, 680, 440);
 		SpringLayout springLayout = new SpringLayout();
 
@@ -230,7 +230,7 @@ public class StartView extends JPanel implements Observer {
 		}
 
 		add(leftPanel);
-
+		controller = new MainController(model, this);
 	}
 
 	@Override
@@ -239,7 +239,6 @@ public class StartView extends JPanel implements Observer {
 			DinnerModel model = (DinnerModel) arg0;
 			costLabel.setText("$ " + model.getTotalMenuPrice());
 		}
-
 	}
 
 }

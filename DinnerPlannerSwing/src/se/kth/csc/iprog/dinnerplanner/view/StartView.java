@@ -38,16 +38,13 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel main;
 	public TabPanel desert;
 	private SpringLayout sl_rightPanel;
-	private JLabel dinnerMenuLabel;
 	private JPanel rightPanel;
-	
-	
+
 	/**
 	 * Create the panel.
 	 * 
 	 * @throws IOException
 	 */
-
 
 	public StartView(DinnerModel model) {
 		model.addObserver(this);
@@ -120,8 +117,6 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.WEST, costTagLabel, 10,
 				SpringLayout.WEST, rightPanel);
 		rightPanel.add(costTagLabel);
-
-
 
 		sl_rightPanel.putConstraint(SpringLayout.NORTH, costLabel, 0,
 				SpringLayout.NORTH, costTagLabel);
@@ -201,25 +196,29 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.SOUTH, ingredientsButton, -10,
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
-		
-	 chosenpanel = new JPanel();
-		sl_rightPanel.putConstraint(SpringLayout.NORTH, chosenpanel, 6, SpringLayout.SOUTH, dinnerMenuLabel);
-		sl_rightPanel.putConstraint(SpringLayout.WEST, chosenpanel, 10, SpringLayout.WEST, rightPanel);
-		sl_rightPanel.putConstraint(SpringLayout.SOUTH, chosenpanel, 248, SpringLayout.SOUTH, dinnerMenuLabel);
-		sl_rightPanel.putConstraint(SpringLayout.EAST, chosenpanel, 230, SpringLayout.WEST, rightPanel);
+
+		chosenpanel = new JPanel();
+		sl_rightPanel.putConstraint(SpringLayout.NORTH, chosenpanel, 6,
+				SpringLayout.SOUTH, dinnerMenuLabel);
+		sl_rightPanel.putConstraint(SpringLayout.WEST, chosenpanel, 10,
+				SpringLayout.WEST, rightPanel);
+		sl_rightPanel.putConstraint(SpringLayout.SOUTH, chosenpanel, 248,
+				SpringLayout.SOUTH, dinnerMenuLabel);
+		sl_rightPanel.putConstraint(SpringLayout.EAST, chosenpanel, 230,
+				SpringLayout.WEST, rightPanel);
 		rightPanel.add(chosenpanel);
 
-	
-addModel(model);
-		//adds the dishes
+		addModel(model);
+		// adds the dishes
 		updateDishes(model.getDishes(), 0);
-		//add the leftPanel
+		// add the leftPanel
 		add(leftPanel);
 
 		new MainController(model, this);
 	}
 
-	JPanel chosenpanel ;
+	JPanel chosenpanel;
+
 	public void updateDishes(Set<Dish> modelDishes, int type) {
 
 		if (type == 1) {
@@ -249,7 +248,7 @@ addModel(model);
 			switch (dish.getType()) {
 			case 1:
 				starter.scrollPanel.add(tempDish);
-				
+
 				starter.updateUI();
 				break;
 			case 2:
@@ -261,15 +260,12 @@ addModel(model);
 				desert.updateUI();
 			}
 		}
-		
-	
+
 	}
 
-	
-public void addModel(DinnerModel model){
+	public void addModel(DinnerModel model) {
 
-
-}
+	}
 
 	@Override
 	public void update(Observable arg0, Object object) {

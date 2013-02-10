@@ -18,7 +18,8 @@ import se.kth.csc.iprog.dinnerplanner.view.IngredientView;
 import se.kth.csc.iprog.dinnerplanner.view.PreparationView;
 import se.kth.csc.iprog.dinnerplanner.view.StartView;
 
-public class MainController implements ActionListener, ChangeListener, MouseListener {
+public class MainController implements ActionListener, ChangeListener,
+		MouseListener {
 	DinnerModel model;
 	StartView view;
 
@@ -34,17 +35,34 @@ public class MainController implements ActionListener, ChangeListener, MouseList
 		view.starter.panelSearch.addActionListener(this);
 		view.desert.panelSearch.addActionListener(this);
 		view.main.panelSearch.addActionListener(this);
-		
-		for (Component dishes :view.starter.scrollPanel.getComponents()){
-			dishes.addMouseListener(this);
-		}
-		for (Component dishes :view.desert.scrollPanel.getComponents()){
-			dishes.addMouseListener(this);
-		}
-		for (Component dishes :view.main.scrollPanel.getComponents()){
-			dishes.addMouseListener(this);
-		}
 
+		addListenersToComponents();
+
+	}
+
+	public void removeAllListeners() {
+		for (Component dishes : view.starter.scrollPanel.getComponents()) {
+			dishes.removeMouseListener(this);
+		}
+		for (Component dishes : view.desert.scrollPanel.getComponents()) {
+			dishes.removeMouseListener(this);
+		}
+		for (Component dishes : view.main.scrollPanel.getComponents()) {
+			dishes.removeMouseListener(this);
+		}
+	}
+
+	public void addListenersToComponents() {
+		for (Component dishes : view.starter.scrollPanel.getComponents()) {
+			dishes.addMouseListener(this);
+
+		}
+		for (Component dishes : view.desert.scrollPanel.getComponents()) {
+			dishes.addMouseListener(this);
+		}
+		for (Component dishes : view.main.scrollPanel.getComponents()) {
+			dishes.addMouseListener(this);
+		}
 	}
 
 	private void setUpView(JComponent comp) {
@@ -64,24 +82,31 @@ public class MainController implements ActionListener, ChangeListener, MouseList
 		if (e.getSource() == view.preparationButton) {
 			setUpView(new PreparationView(model));
 		}
+
 		if (e.getSource() == view.starter.panelSearch) {
 
 			view.updateDishes(
 					model.filterDishesOfType(1,
 							view.starter.panelSearch.getText()), 1);
-
+			
+			removeAllListeners();
+			addListenersToComponents();
 		}
 		if (e.getSource() == view.main.panelSearch) {
 
 			view.updateDishes(model.filterDishesOfType(2,
 					view.main.panelSearch.getText()), 2);
 
+			removeAllListeners();
+			addListenersToComponents();
 		}
 		if (e.getSource() == view.desert.panelSearch) {
 			view.updateDishes(
 					model.filterDishesOfType(3,
 							view.desert.panelSearch.getText()), 3);
 
+			removeAllListeners();
+			addListenersToComponents();
 		}
 
 	}
@@ -97,11 +122,10 @@ public class MainController implements ActionListener, ChangeListener, MouseList
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
-		
-		System.out.println(arg0.getComponent().getName());	
-		for (Dish dish: model.getDishes()){
-			if(dish.getName().equals(arg0.getComponent().getName())){
+
+		System.out.println(arg0.getComponent().getName());
+		for (Dish dish : model.getDishes()) {
+			if (dish.getName().equals(arg0.getComponent().getName())) {
 
 				if (dish.getType() == Dish.STARTER
 						&& !DinnerPlanner.choosenFlag[Dish.STARTER - 1]) {
@@ -116,10 +140,10 @@ public class MainController implements ActionListener, ChangeListener, MouseList
 					DinnerPlanner.choosenFlag[Dish.DESERT - 1] = true;
 					model.selectDish(dish);
 				} else {
-						System.out.println("full");
-					}
+					System.out.println("full");
+				}
 
-				view.addModel(model);//TODO
+				view.addModel(model);// TODO
 			}
 		}
 	}
@@ -127,25 +151,25 @@ public class MainController implements ActionListener, ChangeListener, MouseList
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

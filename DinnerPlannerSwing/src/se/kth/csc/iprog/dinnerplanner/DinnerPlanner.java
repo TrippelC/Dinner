@@ -24,8 +24,8 @@ public class DinnerPlanner extends JFrame {
 	public DinnerPlanner() {
 
 	}
-	
-public static boolean[] choosenFlag;
+
+	public static boolean[] choosenFlag;
 
 	public static void main(String[] args) throws IOException {
 		// Initiating the main JFrame
@@ -52,7 +52,7 @@ public static boolean[] choosenFlag;
 		 */
 
 		// /StartView///////////////////////////////////////////////////////
-//		 JComponent view = new StartView(dinnerPlanner.getModel());
+		// JComponent view = new StartView(dinnerPlanner.getModel());
 		// /END OF StartView////////////////////////////////////////////////
 
 		// /DishView////////////////////////////////////////////////////////
@@ -80,18 +80,18 @@ public static boolean[] choosenFlag;
 					&& !choosenFlag[Dish.STARTER - 1]) {
 				choosenFlag[Dish.STARTER - 1] = true;
 				dinnerPlanner.getModel().selectDish(dish);
-		} else if (dish.getType() == Dish.MAIN
-				&& !choosenFlag[Dish.MAIN - 1]) {
+			} else if (dish.getType() == Dish.MAIN
+					&& !choosenFlag[Dish.MAIN - 1]) {
 				choosenFlag[Dish.MAIN - 1] = true;
 				dinnerPlanner.getModel().selectDish(dish);
 			} else if (dish.getType() == Dish.DESERT
-				&& !choosenFlag[Dish.DESERT - 1]) {
+					&& !choosenFlag[Dish.DESERT - 1]) {
 				choosenFlag[Dish.DESERT - 1] = true;
-			dinnerPlanner.getModel().selectDish(dish);
-		} else {
+				dinnerPlanner.getModel().selectDish(dish);
+			} else {
 				break;
 			}
-//
+		//
 		JComponent view = new StartView(dinnerPlanner.getModel());
 		// /END OF FullMenuView/////////////////////////////////////////////
 

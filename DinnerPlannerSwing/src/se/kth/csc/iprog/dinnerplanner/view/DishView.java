@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JSplitPane;
@@ -21,7 +20,7 @@ public class DishView extends JPanel {
 
 	
 	private BufferedImage bi = null;
-	private ImageIcon ic = new ImageIcon("images/toast.jpg");
+	//private ImageIcon ic = new ImageIcon("images/toast.jpg");
 	
 	
 	/**

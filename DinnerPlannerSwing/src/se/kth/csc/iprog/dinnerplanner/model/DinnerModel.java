@@ -23,10 +23,7 @@ public class DinnerModel extends Observable implements IDinnerModel {
 	 * The constructor of the overall model. Set the default values here
 	 */
 	public DinnerModel()  {
-		
-	
-		
-		
+			
 		//Adding some example data, you can add more
 		Dish dish1 = new Dish("French toast",Dish.STARTER,"toast.jpg","In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
 		Ingredient dish1ing1 = new Ingredient("eggs",0.5,"",1);

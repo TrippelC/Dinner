@@ -35,12 +35,13 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel starter;
 	public TabPanel main;
 	public TabPanel desert;
+	private	MainController controller;
 	/**
 	 * Create the panel.
 	 * 
 	 * @throws IOException
 	 */
-	MainController controller;
+
 
 	public StartView(DinnerModel model) {
 		model.addObserver(this);
@@ -200,7 +201,7 @@ public class StartView extends JPanel implements Observer {
 
 		System.out.println("asdadads");
 
-		updateDishes(model.getDishes(),0);
+		updateDishes(model.getDishes(), 0);
 		add(leftPanel);
 
 		controller = new MainController(model, this);

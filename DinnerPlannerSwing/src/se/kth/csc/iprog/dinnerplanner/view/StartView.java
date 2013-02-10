@@ -200,16 +200,24 @@ public class StartView extends JPanel implements Observer {
 
 		System.out.println("asdadads");
 
-		updateDishes(model.getDishes());
+		updateDishes(model.getDishes(),0);
 		add(leftPanel);
 
 		controller = new MainController(model, this);
 	}
 
-	public void updateDishes(Set<Dish> modelDishes) {
-		starter.scrollPanel.removeAll();
-		main.scrollPanel.removeAll();
-		desert.scrollPanel.removeAll();
+	public void updateDishes(Set<Dish> modelDishes, int type) {
+
+		if (type == 1) {
+
+			starter.scrollPanel.removeAll();
+		} else if (type == 2) {
+
+			main.scrollPanel.removeAll();
+		} else if (type == 3) {
+
+			desert.scrollPanel.removeAll();
+		}
 
 		for (Dish dish : modelDishes) {
 			ImageIcon ic = null;

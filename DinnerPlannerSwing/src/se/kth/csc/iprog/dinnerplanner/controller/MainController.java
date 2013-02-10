@@ -43,7 +43,7 @@ public class MainController implements ActionListener, ChangeListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		System.out.println(e.getSource().toString());
+
 		if (e.getSource() == view.ingredientsButton) {
 			setUpView(new IngredientView(model.getAllIngredients()));
 		}
@@ -52,19 +52,21 @@ public class MainController implements ActionListener, ChangeListener {
 		}
 		if (e.getSource() == view.starter.panelSearch) {
 
-			view.updateDishes(model.filterDishesOfType(1,
-					view.starter.panelSearch.getText()));
+			view.updateDishes(
+					model.filterDishesOfType(1,
+							view.starter.panelSearch.getText()), 1);
 
 		}
 		if (e.getSource() == view.main.panelSearch) {
 
 			view.updateDishes(model.filterDishesOfType(2,
-					view.main.panelSearch.getText()));
+					view.main.panelSearch.getText()), 2);
 
 		}
 		if (e.getSource() == view.desert.panelSearch) {
-			view.updateDishes(model.filterDishesOfType(3,
-					view.desert.panelSearch.getText()));
+			view.updateDishes(
+					model.filterDishesOfType(3,
+							view.desert.panelSearch.getText()), 3);
 
 		}
 

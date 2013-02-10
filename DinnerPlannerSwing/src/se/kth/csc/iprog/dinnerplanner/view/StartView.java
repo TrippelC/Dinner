@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import javax.swing.SpinnerNumberModel;
 
@@ -43,7 +44,7 @@ public class StartView extends JPanel implements Observer {
 
 	public StartView(DinnerModel model) {
 		model.addObserver(this);
-	
+
 		setBounds(100, 100, 680, 440);
 		SpringLayout springLayout = new SpringLayout();
 
@@ -135,7 +136,7 @@ public class StartView extends JPanel implements Observer {
 		JLabel[] dishIcon = new JLabel[model.getSelectedCount()];
 		JLabel[] lblNewLabel = new JLabel[model.getSelectedCount()];
 		JButton[] btnNewButton = new JButton[model.getSelectedCount()];
-		
+
 		for (int i = 0; i < model.getSelectedCount(); i++) {
 			dishIcon[i] = new JLabel(new ImageIcon("images/"
 					+ model.getSelectedDishes()[i].getImage()));
@@ -197,13 +198,20 @@ public class StartView extends JPanel implements Observer {
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
 
-		// update(null, model);
+		System.out.println("asdadads");
 
+		updateDishes(model.getDishes());
+		add(leftPanel);
+
+		controller = new MainController(model, this);
+	}
+
+	public void updateDishes(Set<Dish> modelDishes) {
 		starter.scrollPanel.removeAll();
 		main.scrollPanel.removeAll();
 		desert.scrollPanel.removeAll();
-		// DinnerModel model = (DinnerModel) object;
-		for (Dish dish : model.getDishes()) {
+
+		for (Dish dish : modelDishes) {
 			ImageIcon ic = null;
 			try {
 				ic = new ImageIcon(ImageIO.read(
@@ -229,8 +237,9 @@ public class StartView extends JPanel implements Observer {
 			}
 		}
 
-		add(leftPanel);
-		controller = new MainController(model, this);
+		starter.updateUI();
+		main.updateUI();
+		desert.updateUI();
 	}
 
 	@Override

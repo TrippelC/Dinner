@@ -41,7 +41,7 @@ public class DinnerModel extends Observable implements IDinnerModel {
 		dish1.addIngredient(dish1ing5);
 		dishes.add(dish1);
 		
-		Dish dish6 = new Dish("toast",Dish.STARTER,"toast.jpg","In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
+		Dish dish6 = new Dish("gaga",Dish.STARTER,"toast.jpg","In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
 		dish6.addIngredient(dish1ing1);
 		dish6.addIngredient(dish1ing2);
 		dish6.addIngredient(dish1ing3);

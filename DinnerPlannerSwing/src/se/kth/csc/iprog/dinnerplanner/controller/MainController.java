@@ -143,7 +143,7 @@ public class MainController implements ActionListener, ChangeListener,
 					System.out.println("full");
 				}
 
-				view.addModel(model);// TODO
+				view.addModels(model);// TODO
 			}
 		}
 	}

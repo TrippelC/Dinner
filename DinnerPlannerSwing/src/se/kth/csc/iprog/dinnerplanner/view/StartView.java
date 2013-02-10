@@ -198,7 +198,7 @@ public class StartView extends JPanel implements Observer {
 		rightPanel.add(ingredientsButton);
 
 
-		addModel(model);
+		//addModels(model);//TODO MAYBE
 		// adds the dishes
 		updateDishes(model.getDishes(), 0);
 		// add the leftPanel
@@ -252,8 +252,8 @@ public class StartView extends JPanel implements Observer {
 
 	}
 
-	public void addModel(DinnerModel model) {
-
+	public void addModels(DinnerModel model) {
+//TODO
 	}
 
 	@Override

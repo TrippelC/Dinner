@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 import se.kth.csc.iprog.dinnerplanner.model.Dish;
-import se.kth.csc.iprog.dinnerplanner.model.ScrollablePanel;
 
 public class TabPanel extends JPanel {
 	public ScrollablePanel scrollPanel = null;

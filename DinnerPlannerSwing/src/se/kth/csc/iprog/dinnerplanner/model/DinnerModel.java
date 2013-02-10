@@ -1,9 +1,10 @@
 package se.kth.csc.iprog.dinnerplanner.model;
 
 import java.util.HashSet;
+import java.util.Observable;
 import java.util.Set;
 
-public class DinnerModel implements IDinnerModel{
+public class DinnerModel extends Observable implements IDinnerModel {
 	
 
 	Set<Dish> dishes = new HashSet<Dish>();
@@ -21,9 +22,9 @@ public class DinnerModel implements IDinnerModel{
 	/**
 	 * The constructor of the overall model. Set the default values here
 	 */
-	public DinnerModel(){
+	public DinnerModel()  {
 		
-		
+	
 		
 		
 		//Adding some example data, you can add more
@@ -147,6 +148,8 @@ public class DinnerModel implements IDinnerModel{
 	@Override
 	public void setNumberOfGuests(int numberOfGuests) {
 		this.numberOfGuests = numberOfGuests;
+		setChanged();
+		notifyObservers("numberOfGuests");
 	}
 
 	@Override
@@ -196,8 +199,8 @@ public class DinnerModel implements IDinnerModel{
 		for(Ingredient ing : dish.getIngredients()){
 			price += ing.getPrice();
 		}
-		
-		return price*numberOfGuests;
+	
+		return price;
 	}
 	
 	public void selectDish(Dish dish){

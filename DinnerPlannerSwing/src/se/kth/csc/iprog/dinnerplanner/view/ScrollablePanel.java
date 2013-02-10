@@ -1,4 +1,4 @@
-package se.kth.csc.iprog.dinnerplanner.model;
+package se.kth.csc.iprog.dinnerplanner.view;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;

@@ -220,7 +220,7 @@ public class DinnerModel extends Observable implements IDinnerModel {
 			price += ing.getPrice();
 		}
 	
-		return price;
+		return price * numberOfGuests;
 	}
 	
 	public void selectDish(Dish dish){

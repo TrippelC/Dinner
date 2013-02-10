@@ -35,6 +35,7 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel starter;
 	public TabPanel main;
 	public TabPanel desert;
+	
 	private	MainController controller;
 	/**
 	 * Create the panel.
@@ -72,9 +73,6 @@ public class StartView extends JPanel implements Observer {
 		// //////////////////////////////////////////////////////////////////////////////////////////////////
 		// ADDS MODEL AS JLABELS
 
-		// //////////////////////////////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////////////////////////////
-		// //////////////////////////////////////////////////////////////////////////////////////////////////
 		// //////////////////////////////////////////////////////////////////////////////////////////////////
 		// //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,8 +147,7 @@ public class StartView extends JPanel implements Observer {
 					+ "</html>");
 			btnNewButton[i] = new JButton(new ImageIcon(
 					"images/delete_icon.gif"));
-			btnNewButton[i].addActionListener(controller);
-			btnNewButton[i].setName("name" + i);
+
 
 			sl_rightPanel.putConstraint(SpringLayout.NORTH, dishIcon[i],
 					i == 0 ? 20 : 15, SpringLayout.SOUTH,
@@ -237,18 +234,18 @@ public class StartView extends JPanel implements Observer {
 			switch (dish.getType()) {
 			case 1:
 				starter.scrollPanel.add(tempDish);
+				starter.updateUI();
 				break;
 			case 2:
 				main.scrollPanel.add(tempDish);
+				main.updateUI();
 				break;
 			case 3:
 				desert.scrollPanel.add(tempDish);
+				desert.updateUI();
 			}
 		}
-
-		starter.updateUI();
-		main.updateUI();
-		desert.updateUI();
+	
 	}
 
 	@Override

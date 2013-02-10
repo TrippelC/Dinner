@@ -34,7 +34,7 @@ public class DinnerPlanner extends JFrame {
 		
 		//test no more :D
 		// Foo
-		//bar
+		// bar
 		dinnerPlanner.setTitle("Dinner Planner");
 			
 		//Getting some dishes for setup

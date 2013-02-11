@@ -26,6 +26,9 @@ import java.util.Observer;
 import java.util.Set;
 
 import javax.swing.SpinnerNumberModel;
+import java.awt.Panel;
+import javax.swing.JLayeredPane;
+import java.awt.Canvas;
 
 public class StartView extends JPanel implements Observer {
 
@@ -195,6 +198,21 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.SOUTH, ingredientsButton, -10,
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
+		
+		JLabel lblStarter = new JLabel("Starter:");
+		sl_rightPanel.putConstraint(SpringLayout.NORTH, lblStarter, 5, SpringLayout.SOUTH, dinnerMenuLabel);
+		sl_rightPanel.putConstraint(SpringLayout.WEST, lblStarter, 0, SpringLayout.WEST, nopLabel);
+		rightPanel.add(lblStarter);
+		
+		JLabel lblMain = new JLabel("Main:");
+		sl_rightPanel.putConstraint(SpringLayout.NORTH, lblMain, 38, SpringLayout.SOUTH, lblStarter);
+		sl_rightPanel.putConstraint(SpringLayout.WEST, lblMain, 10, SpringLayout.WEST, rightPanel);
+		rightPanel.add(lblMain);
+		
+		JLabel lblDesert = new JLabel("Desert:");
+		sl_rightPanel.putConstraint(SpringLayout.NORTH, lblDesert, 40, SpringLayout.SOUTH, lblMain);
+		sl_rightPanel.putConstraint(SpringLayout.WEST, lblDesert, 0, SpringLayout.WEST, nopLabel);
+		rightPanel.add(lblDesert);
 
 		// addModels(model);//TODO MAYBE
 		// adds the dishes

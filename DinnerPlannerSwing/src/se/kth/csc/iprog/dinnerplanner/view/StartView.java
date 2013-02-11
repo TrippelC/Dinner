@@ -253,6 +253,7 @@ public class StartView extends JPanel implements Observer {
 
 		dishIcon[type - 1].setIcon(new ImageIcon("images/"
 				+ model.getSelectedDish(type).getImage()));
+		dishIcon[type - 1].setName(model.getSelectedDish(type).getName());
 		lblNewLabel[type - 1].setText("<html>" + type + ": "
 				+ model.getSelectedDish(type).getName() + "<br>Cost: $ "
 				+ model.getDishPrice(model.getSelectedDish(type)) + "</html>");

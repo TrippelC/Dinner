@@ -14,6 +14,7 @@ import javax.swing.event.ChangeListener;
 import se.kth.csc.iprog.dinnerplanner.DinnerPlanner;
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
 import se.kth.csc.iprog.dinnerplanner.model.Dish;
+import se.kth.csc.iprog.dinnerplanner.view.DishView;
 import se.kth.csc.iprog.dinnerplanner.view.IngredientView;
 import se.kth.csc.iprog.dinnerplanner.view.PreparationView;
 import se.kth.csc.iprog.dinnerplanner.view.StartView;
@@ -38,6 +39,7 @@ public class MainController implements ActionListener, ChangeListener,
 		view.main.panelSearch.addActionListener(this);
 		for (int i = 0; i < 3; i++) {
 			view.btnNewButton[i].addActionListener(this);
+			view.dishIcon[i].addMouseListener(this);
 		}
 
 		addListenersToDishComponents();
@@ -147,9 +149,17 @@ public class MainController implements ActionListener, ChangeListener,
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-
-		for (Dish dish : model.getDishes()) {
-			if (dish.getName().equals(arg0.getComponent().getName())) {
+		if(arg0.getSource() == view.dishIcon[0]){
+			setUpView(new DishView(model, model.getDishByName(view.dishIcon[0].getName(),model)));
+		}
+		if(arg0.getSource() == view.dishIcon[1]){
+			setUpView(new DishView(model, model.getDishByName(view.dishIcon[1].getName(),model)));
+		}
+		if(arg0.getSource() == view.dishIcon[2]){
+			setUpView(new DishView(model, model.getDishByName(view.dishIcon[2].getName(),model)));
+		}
+		
+		Dish dish = model.getDishByName(arg0.getComponent().getName(), model);
 				if (dish.getType() == Dish.STARTER
 						&& !choosenFlag[Dish.STARTER - 1]) {
 					choosenFlag[Dish.STARTER - 1] = true;
@@ -163,11 +173,11 @@ public class MainController implements ActionListener, ChangeListener,
 					choosenFlag[Dish.DESERT - 1] = true;
 					model.selectDish(dish);
 				} else {
-					System.out.println("full");
+					//System.out.println("full");
 				}
 				view.addDishes(model, choosenFlag);
-			}
-		}
+			
+		
 		view.costLabel.setText("$ " + model.getTotalMenuPrice());
 
 	}

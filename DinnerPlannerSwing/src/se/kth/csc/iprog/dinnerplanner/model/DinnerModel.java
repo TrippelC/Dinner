@@ -246,4 +246,12 @@ public class DinnerModel extends Observable implements IDinnerModel {
 		selectedDishes[type]=null;
 	}
 	
+	public Dish getDishByName(String dishName, DinnerModel model){
+		for (Dish dish : model.getDishes()) {
+			if (dish.getName().equals(dishName)) {
+				return dish;
+			}
+		}
+		return null;
+	}
 }

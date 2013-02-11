@@ -123,6 +123,7 @@ public class MainController implements ActionListener, ChangeListener,
 			removeDish(1);
 		}
 		if (e.getSource() == view.btnNewButton[2]) { // 2 == type 3
+			
 			removeDish(2);
 		}
 	}
@@ -134,8 +135,6 @@ public class MainController implements ActionListener, ChangeListener,
 		choosenFlag[type] = false;
 		model.removeSelectedDish(type);
 
-		model.setNumberOfGuests((Integer) view.guestCountSpinner.getModel()
-				.getValue());
 	}
 
 	@Override
@@ -177,8 +176,6 @@ public class MainController implements ActionListener, ChangeListener,
 				}
 				view.addDishes(model, choosenFlag);
 			
-		
-		view.costLabel.setText("$ " + model.getTotalMenuPrice());
 
 	}
 

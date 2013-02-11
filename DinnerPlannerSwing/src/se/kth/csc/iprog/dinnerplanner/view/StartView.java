@@ -45,7 +45,7 @@ public class StartView extends JPanel implements Observer {
 	public JLabel[] dishIcon = new JLabel[3];
 	public JLabel[] lblNewLabel = new JLabel[3];
 	public JButton[] btnNewButton = new JButton[3];
-
+	private DinnerModel model;
 	/**
 	 * Create the panel.
 	 * 
@@ -53,6 +53,7 @@ public class StartView extends JPanel implements Observer {
 	 */
 
 	public StartView(DinnerModel model) {
+		this.model = model;
 		model.addObserver(this);
 
 		setBounds(100, 100, 680, 440);
@@ -214,7 +215,6 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.WEST, lblDesert, 0, SpringLayout.WEST, nopLabel);
 		rightPanel.add(lblDesert);
 
-		// addModels(model);//TODO MAYBE
 		// adds the dishes
 		updateDishes(model.getDishes(), 0);
 		// add the leftPanel
@@ -295,8 +295,11 @@ public class StartView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object object) {
-		if (object.equals("numberOfGuests")) {
+		if (object.equals("numberOfGuests") || object.equals("removedDish")) {
 			DinnerModel model = (DinnerModel) arg0;
+			costLabel.setText("$ " + model.getTotalMenuPrice());
+		}
+		if(object.equals("selectDish")){
 			costLabel.setText("$ " + model.getTotalMenuPrice());
 		}
 	}

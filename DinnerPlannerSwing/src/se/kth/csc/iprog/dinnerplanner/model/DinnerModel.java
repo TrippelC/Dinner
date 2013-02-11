@@ -218,6 +218,8 @@ public class DinnerModel extends Observable implements IDinnerModel {
 	
 	public void selectDish(Dish dish){
 		selectedDishes[dish.getType()-1] = dish;
+		setChanged();
+		notifyObservers("selectDish");
 	}
 	
 	public int getSelectedCount(){
@@ -244,6 +246,8 @@ public class DinnerModel extends Observable implements IDinnerModel {
 	
 	public void removeSelectedDish(int type){
 		selectedDishes[type]=null;
+		setChanged();
+		notifyObservers("removedDish");
 	}
 	
 	public Dish getDishByName(String dishName, DinnerModel model){

@@ -215,7 +215,7 @@ public class StartView extends JPanel implements Observer {
 		sl_rightPanel.putConstraint(SpringLayout.WEST, lblDesert, 0, SpringLayout.WEST, nopLabel);
 		rightPanel.add(lblDesert);
 
-		// adds the dishes
+		// adds the dishes 
 		updateDishes(model.getDishes(), 0);
 		// add the leftPanel
 		add(leftPanel);
@@ -224,7 +224,7 @@ public class StartView extends JPanel implements Observer {
 	}
 
 	public void updateDishes(Set<Dish> modelDishes, int type) {
-
+//add all the dishes to the tabpanels from the model
 		if (type == 1) {
 
 			starter.scrollPanel.removeAll();
@@ -267,7 +267,8 @@ public class StartView extends JPanel implements Observer {
 
 	}
 
-	public void addDishToRightPanel(int type, DinnerModel model) {
+	public void addDishToRightPanel(int type, DinnerModel model) { 
+		//makes the hidden labels and buttons visible and set them to the chosen dishes
 
 		dishIcon[type - 1].setIcon(new ImageIcon("images/"
 				+ model.getSelectedDish(type).getImage()));
@@ -280,7 +281,8 @@ public class StartView extends JPanel implements Observer {
 		lblNewLabel[type - 1].setVisible(true);
 	}
 
-	public void addDishes(DinnerModel model, boolean[] choosen) {
+	public void addDishes(DinnerModel model, boolean[] choosen) { // adds the dishes to the right panel
+		
 		if (choosen[0]) {
 			addDishToRightPanel(1,model);
 		} 
@@ -299,7 +301,7 @@ public class StartView extends JPanel implements Observer {
 			DinnerModel model = (DinnerModel) arg0;
 			costLabel.setText("$ " + model.getTotalMenuPrice());
 		}
-		if(object.equals("selectDish")){
+		if(object.equals("selectDish")){ // update costlabel when a dish is selected 
 			costLabel.setText("$ " + model.getTotalMenuPrice());
 		}
 	}

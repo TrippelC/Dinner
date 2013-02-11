@@ -61,7 +61,6 @@ public class MainController implements ActionListener, ChangeListener,
 	public void addListenersToDishComponents() {
 		for (Component dishes : view.starter.scrollPanel.getComponents()) {
 			dishes.addMouseListener(this);
-
 		}
 		for (Component dishes : view.desert.scrollPanel.getComponents()) {
 			dishes.addMouseListener(this);
@@ -95,7 +94,7 @@ public class MainController implements ActionListener, ChangeListener,
 					model.filterDishesOfType(1,
 							view.starter.panelSearch.getText()), 1);
 
-			removeAllDishListeners();
+			removeAllDishListeners(); // prevents adding another listener to a component that already have one
 			addListenersToDishComponents();
 		}
 		if (e.getSource() == view.main.panelSearch) {
@@ -139,16 +138,16 @@ public class MainController implements ActionListener, ChangeListener,
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if (e.getSource() == view.guestCountSpinner) {
+		if (e.getSource() == view.guestCountSpinner) { // Guest spinner
 			model.setNumberOfGuests((Integer) view.guestCountSpinner.getModel()
 					.getValue());
-			view.addDishes(model, choosenFlag);
+			view.addDishes(model, choosenFlag);  // Update dish label cost 
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(arg0.getSource() == view.dishIcon[0]){
+		if(arg0.getSource() == view.dishIcon[0]){ //Opens DishView
 			setUpView(new DishView(model, model.getDishByName(view.dishIcon[0].getName(),model)));
 		}
 		if(arg0.getSource() == view.dishIcon[1]){
@@ -158,7 +157,7 @@ public class MainController implements ActionListener, ChangeListener,
 			setUpView(new DishView(model, model.getDishByName(view.dishIcon[2].getName(),model)));
 		}
 		
-		Dish dish = model.getDishByName(arg0.getComponent().getName(), model);
+		Dish dish = model.getDishByName(arg0.getComponent().getName(), model);//Select a Dish
 				if (dish.getType() == Dish.STARTER
 						&& !choosenFlag[Dish.STARTER - 1]) {
 					choosenFlag[Dish.STARTER - 1] = true;
@@ -172,7 +171,7 @@ public class MainController implements ActionListener, ChangeListener,
 					choosenFlag[Dish.DESERT - 1] = true;
 					model.selectDish(dish);
 				} else {
-					//System.out.println("full");
+					//System.out.println("full"); MAXIMUM 1 dish per type
 				}
 				view.addDishes(model, choosenFlag);
 			

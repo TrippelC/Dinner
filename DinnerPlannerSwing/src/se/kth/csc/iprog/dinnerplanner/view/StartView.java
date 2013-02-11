@@ -37,8 +37,11 @@ public class StartView extends JPanel implements Observer {
 	public TabPanel starter;
 	public TabPanel main;
 	public TabPanel desert;
-	private SpringLayout sl_rightPanel;
-	private JPanel rightPanel;
+	public SpringLayout sl_rightPanel;
+	public JPanel rightPanel;
+	public JLabel[] dishIcon = new JLabel[3];
+	public JLabel[] lblNewLabel = new JLabel[3];
+	public JButton[] btnNewButton = new JButton[3];
 
 	/**
 	 * Create the panel.
@@ -134,19 +137,10 @@ public class StartView extends JPanel implements Observer {
 		dinnerMenuLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rightPanel.add(dinnerMenuLabel);
 
-		JLabel[] dishIcon = new JLabel[model.getSelectedCount()];
-		JLabel[] lblNewLabel = new JLabel[model.getSelectedCount()];
-		JButton[] btnNewButton = new JButton[model.getSelectedCount()];
-
-		for (int i = 0; i < model.getSelectedCount(); i++) {
-			dishIcon[i] = new JLabel(new ImageIcon("images/"
-					+ model.getSelectedDishes()[i].getImage()));
-			lblNewLabel[i] = new JLabel("<html>"
-					+ Dish.getDishTypeName(model.getSelectedDishes()[i]
-							.getType()) + ": "
-					+ model.getSelectedDishes()[i].getName() + "<br>Cost: $ "
-					+ model.getDishPrice(model.getSelectedDishes()[i])
-					+ "</html>");
+		// Add the dishes delete buttons and images to the right pane
+		for (int i = 0; i < 3; i++) {
+			dishIcon[i] = new JLabel(new ImageIcon("images/delete_icon.gif"));
+			lblNewLabel[i] = new JLabel("null");
 			btnNewButton[i] = new JButton(new ImageIcon(
 					"images/delete_icon.gif"));
 
@@ -181,6 +175,11 @@ public class StartView extends JPanel implements Observer {
 			sl_rightPanel.putConstraint(SpringLayout.WEST, btnNewButton[i],
 					-50, SpringLayout.EAST, rightPanel);
 			rightPanel.add(btnNewButton[i]);
+
+			dishIcon[i].setVisible(false);
+			lblNewLabel[i].setVisible(false);
+			btnNewButton[i].setVisible(false);
+
 		}
 
 		// preparationButton
@@ -197,8 +196,7 @@ public class StartView extends JPanel implements Observer {
 				SpringLayout.SOUTH, rightPanel);
 		rightPanel.add(ingredientsButton);
 
-
-		//addModels(model);//TODO MAYBE
+		// addModels(model);//TODO MAYBE
 		// adds the dishes
 		updateDishes(model.getDishes(), 0);
 		// add the leftPanel
@@ -206,7 +204,6 @@ public class StartView extends JPanel implements Observer {
 
 		new MainController(model, this);
 	}
-
 
 	public void updateDishes(Set<Dish> modelDishes, int type) {
 
@@ -252,8 +249,29 @@ public class StartView extends JPanel implements Observer {
 
 	}
 
-	public void addModels(DinnerModel model) {
-//TODO
+	public void addDishToRightPanel(int type, DinnerModel model) {
+
+		dishIcon[type - 1].setIcon(new ImageIcon("images/"
+				+ model.getSelectedDish(type).getImage()));
+		lblNewLabel[type - 1].setText("<html>" + type + ": "
+				+ model.getSelectedDish(type).getName() + "<br>Cost: $ "
+				+ model.getDishPrice(model.getSelectedDish(type)) + "</html>");
+		btnNewButton[type - 1].setVisible(true);
+		dishIcon[type - 1].setVisible(true);
+		lblNewLabel[type - 1].setVisible(true);
+	}
+
+	public void addModels(DinnerModel model, boolean[] choosen) {
+		if (choosen[0]) {
+			addDishToRightPanel(1,model);
+		} 
+		if (choosen[1]) {
+			addDishToRightPanel(2,model);
+		} 
+		if (choosen[2]) {
+			addDishToRightPanel(3,model);
+			}
+
 	}
 
 	@Override

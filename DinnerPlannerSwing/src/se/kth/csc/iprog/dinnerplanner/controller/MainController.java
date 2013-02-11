@@ -20,8 +20,9 @@ import se.kth.csc.iprog.dinnerplanner.view.StartView;
 
 public class MainController implements ActionListener, ChangeListener,
 		MouseListener {
-	DinnerModel model;
-	StartView view;
+	private DinnerModel model;
+	private StartView view;
+	private boolean[] choosenFlag = new boolean[3];
 
 	public MainController(DinnerModel model, StartView view) {
 		this.model = model;
@@ -36,11 +37,11 @@ public class MainController implements ActionListener, ChangeListener,
 		view.desert.panelSearch.addActionListener(this);
 		view.main.panelSearch.addActionListener(this);
 
-		addListenersToComponents();
+		addListenersToDishComponents();
 
 	}
 
-	public void removeAllListeners() {
+	public void removeAllDishListeners() {
 		for (Component dishes : view.starter.scrollPanel.getComponents()) {
 			dishes.removeMouseListener(this);
 		}
@@ -52,7 +53,7 @@ public class MainController implements ActionListener, ChangeListener,
 		}
 	}
 
-	public void addListenersToComponents() {
+	public void addListenersToDishComponents() {
 		for (Component dishes : view.starter.scrollPanel.getComponents()) {
 			dishes.addMouseListener(this);
 
@@ -88,25 +89,25 @@ public class MainController implements ActionListener, ChangeListener,
 			view.updateDishes(
 					model.filterDishesOfType(1,
 							view.starter.panelSearch.getText()), 1);
-			
-			removeAllListeners();
-			addListenersToComponents();
+
+			removeAllDishListeners();
+			addListenersToDishComponents();
 		}
 		if (e.getSource() == view.main.panelSearch) {
 
 			view.updateDishes(model.filterDishesOfType(2,
 					view.main.panelSearch.getText()), 2);
 
-			removeAllListeners();
-			addListenersToComponents();
+			removeAllDishListeners();
+			addListenersToDishComponents();
 		}
 		if (e.getSource() == view.desert.panelSearch) {
 			view.updateDishes(
 					model.filterDishesOfType(3,
 							view.desert.panelSearch.getText()), 3);
 
-			removeAllListeners();
-			addListenersToComponents();
+			removeAllDishListeners();
+			addListenersToDishComponents();
 		}
 
 	}
@@ -116,7 +117,7 @@ public class MainController implements ActionListener, ChangeListener,
 		if (e.getSource() == view.guestCountSpinner) {
 			model.setNumberOfGuests((Integer) view.guestCountSpinner.getModel()
 					.getValue());
-
+			
 		}
 	}
 
@@ -128,22 +129,22 @@ public class MainController implements ActionListener, ChangeListener,
 			if (dish.getName().equals(arg0.getComponent().getName())) {
 
 				if (dish.getType() == Dish.STARTER
-						&& !DinnerPlanner.choosenFlag[Dish.STARTER - 1]) {
-					DinnerPlanner.choosenFlag[Dish.STARTER - 1] = true;
+						&& !choosenFlag[Dish.STARTER - 1]) {
+					choosenFlag[Dish.STARTER - 1] = true;
 					model.selectDish(dish);
 				} else if (dish.getType() == Dish.MAIN
-						&& !DinnerPlanner.choosenFlag[Dish.MAIN - 1]) {
-					DinnerPlanner.choosenFlag[Dish.MAIN - 1] = true;
+						&& !choosenFlag[Dish.MAIN - 1]) {
+					choosenFlag[Dish.MAIN - 1] = true;
 					model.selectDish(dish);
 				} else if (dish.getType() == Dish.DESERT
-						&& !DinnerPlanner.choosenFlag[Dish.DESERT - 1]) {
-					DinnerPlanner.choosenFlag[Dish.DESERT - 1] = true;
+						&& !choosenFlag[Dish.DESERT - 1]) {
+					choosenFlag[Dish.DESERT - 1] = true;
 					model.selectDish(dish);
 				} else {
 					System.out.println("full");
 				}
 
-				view.addModels(model);// TODO
+				view.addModels(model,choosenFlag);
 			}
 		}
 	}

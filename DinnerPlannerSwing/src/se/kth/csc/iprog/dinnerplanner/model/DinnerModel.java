@@ -242,4 +242,8 @@ public class DinnerModel extends Observable implements IDinnerModel {
 		return selectedDishes;
 	}
 	
+	public void removeSelectedDish(int type){
+		selectedDishes[type]=null;
+	}
+	
 }

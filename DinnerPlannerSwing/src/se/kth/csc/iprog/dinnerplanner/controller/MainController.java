@@ -36,6 +36,9 @@ public class MainController implements ActionListener, ChangeListener,
 		view.starter.panelSearch.addActionListener(this);
 		view.desert.panelSearch.addActionListener(this);
 		view.main.panelSearch.addActionListener(this);
+		for (int i = 0; i < 3; i++) {
+			view.btnNewButton[i].addActionListener(this);
+		}
 
 		addListenersToDishComponents();
 
@@ -109,7 +112,28 @@ public class MainController implements ActionListener, ChangeListener,
 			removeAllDishListeners();
 			addListenersToDishComponents();
 		}
+		if (e.getSource() == view.btnNewButton[0]) { // 0 == type 1
 
+			removeDish(0);
+		}
+		if (e.getSource() == view.btnNewButton[1]) { // 1 == type 2
+
+			removeDish(1);
+		}
+		if (e.getSource() == view.btnNewButton[2]) { // 2 == type 3
+			removeDish(2);
+		}
+	}
+
+	public void removeDish(int type) {
+		view.btnNewButton[type].setVisible(false);
+		view.lblNewLabel[type].setVisible(false);
+		view.dishIcon[type].setVisible(false);
+		choosenFlag[type] = false;
+		model.removeSelectedDish(type);
+
+		model.setNumberOfGuests((Integer) view.guestCountSpinner.getModel()
+				.getValue());
 	}
 
 	@Override
@@ -117,17 +141,15 @@ public class MainController implements ActionListener, ChangeListener,
 		if (e.getSource() == view.guestCountSpinner) {
 			model.setNumberOfGuests((Integer) view.guestCountSpinner.getModel()
 					.getValue());
-			
+			view.addDishes(model, choosenFlag);
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
-		System.out.println(arg0.getComponent().getName());
 		for (Dish dish : model.getDishes()) {
 			if (dish.getName().equals(arg0.getComponent().getName())) {
-
 				if (dish.getType() == Dish.STARTER
 						&& !choosenFlag[Dish.STARTER - 1]) {
 					choosenFlag[Dish.STARTER - 1] = true;
@@ -143,10 +165,11 @@ public class MainController implements ActionListener, ChangeListener,
 				} else {
 					System.out.println("full");
 				}
-
-				view.addModels(model,choosenFlag);
+				view.addDishes(model, choosenFlag);
 			}
 		}
+		view.costLabel.setText("$ " + model.getTotalMenuPrice());
+
 	}
 
 	@Override

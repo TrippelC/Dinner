@@ -261,7 +261,7 @@ public class StartView extends JPanel implements Observer {
 		lblNewLabel[type - 1].setVisible(true);
 	}
 
-	public void addModels(DinnerModel model, boolean[] choosen) {
+	public void addDishes(DinnerModel model, boolean[] choosen) {
 		if (choosen[0]) {
 			addDishToRightPanel(1,model);
 		} 
